@@ -140,11 +140,11 @@ A proposta do sistema é reduzir a dependência de processos manuais e integrar 
 
 ### RN01 — Validação de estoque
 
-Uma venda somente pode ser concluída se houver quantidade suficiente do produto em estoque. O sistema não deve permitir que uma venda gere estoque negativo.
+Uma venda somente pode ser concluída se houver quantidade suficiente do produto em estoque. O sistema não deve permitir que uma venda gere estoque negativo. 
 
 ### RN02 — Condição para venda fiada
 
-Uma venda na modalidade fiado somente pode ser realizada quando o cliente estiver cadastrado, ativo e dentro do limite de crédito ou prazo estabelecido.
+Uma venda na modalidade fiado somente pode ser realizada quando o cliente estiver cadastrado, ativo e dentro do limite de crédito ou prazo estabelecido. O prazo de pagamento é ate uma semana, caso não seja pago o estabelecimento não prestara serviço ate o pagamento ser realizado ou um acordo ser feito com o cliente, independente do tempo de atraso do pagamento do fiado não será cobrado taxa ou juros que poderá ser pago por debito/credito, pix e dinheiro.
 
 ### RN03 — Fechamento de caixa
 
@@ -167,6 +167,10 @@ A organização estabelece limites para compras fiadas. Quando o cliente ultrapa
 ### RN07 — Acesso restrito a funções gerenciais
 
 Funções críticas, como alterações manuais de preços, exclusão de registros e liberação de crédito especial, devem ser restritas aos usuários com perfil de gerente.
+
+### RN08 - Controle de estoque 
+
+Parte essencial que analisa com um sistema interno quantos produtos foram vendidos e o reabastecimento sempre é feito por distribuidoras diversas como o atacadão. 
 
 ---
 
@@ -257,6 +261,10 @@ Representa as operações de venda realizadas no estabelecimento.
 ### ITENS_VENDA_REI
 
 Representa os itens que compõem uma venda, incluindo quantidade e preço unitário.
+
+### CAIXA 
+
+Representa o controle de lucros da loja e calcula também a entrada e saída do dinheiro 
 
 ## Atributos e classificações
 
