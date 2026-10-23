@@ -270,6 +270,7 @@ O modelo conceitual atual representa os seguintes relacionamentos principais:
 - **USUARIO — realiza_e_fiado — VENDA:** relaciona o usuário responsável à operação de venda.
 - **PRODUTO — possui — ESTOQUE:** relaciona produtos às respectivas quantidades controladas.
 - **PRODUTO / VENDA — itens_venda_rei:** representa a composição das vendas por produtos, registrando quantidade e preço unitário.
+- **CAIXA — possui — VENDA:** representa o controle de vendas do dia/semana/mês da loja, controle da meta estipulada e também horário de abertura e fechamento de caixa.
 
 ## Restrições e políticas aplicadas ao modelo
 
