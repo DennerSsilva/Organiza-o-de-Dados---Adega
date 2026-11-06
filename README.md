@@ -174,97 +174,80 @@ Parte essencial que analisa com um sistema interno quantos produtos foram vendid
 
 ---
 
-# 5. Dicionário de Dados Conceitual (Preliminar)
+# 5. Dicionario de Dados Conceitual
 
-O dicionário abaixo apresenta os principais atributos identificados a partir do modelo conceitual atual.
+### Entidade: CLIENTE
 
-## Entidade: CLIENTE
-
-| Atributo | Descrição | Regra de negócio associada |
+| Atributo | Tipo | Descrição |
 |---|---|---|
-| **ID_CLIENTE** | Identificador único do cliente. | Deve identificar unicamente cada cliente. |
-| **nome** | Nome do cliente. | Deve ser informado para identificação do cliente. |
-| **tsleone** | Atributo de contato registrado no modelo atual. | Deve representar uma informação de contato do cliente. |
-| **endereço** | Endereço do cliente. | Informação cadastral do cliente. |
+| id_cliente | INT | Identificador único do cliente. |
+| nome | VARCHAR(100) | Nome completo do cliente. |
+| numero | VARCHAR(10) | Número do endereço. |
+| complemento | VARCHAR(60) | Complemento do endereço. |
+| cep | CHAR(8) | Chave estrangeira relacionada à entidade CEP. |
 
-## Entidade: USUARIO
+### Entidade: CEP
 
-| Atributo | Descrição | Regra de negócio associada |
+| Atributo | Tipo | Descrição |
 |---|---|---|
-| **ID_USUARIO** | Identificador único do usuário. | Deve identificar unicamente cada usuário. |
-| **nome** | Nome do usuário. | Deve ser informado para identificação. |
-| **senha** | Credencial de acesso do usuário. | O acesso deve ser restrito a usuários autorizados. |
-| **nivel_acesso** | Define o nível de acesso do usuário. | Funções gerenciais devem ser restritas ao perfil autorizado. |
+| cep | CHAR(8) | Identificador do CEP. |
+| logradouro | VARCHAR(120) | Rua ou avenida. |
+| bairro | VARCHAR(60) | Bairro do endereço. |
+| cidade | VARCHAR(60) | Cidade. |
+| uf | CHAR(2) | Unidade federativa. |
 
-## Entidade: PRODUTO
+### Entidade: USUARIO
 
-| Atributo | Descrição | Regra de negócio associada |
+| Atributo | Tipo | Descrição |
 |---|---|---|
-| **ID_PRODUTO** | Identificador único do produto. | Deve identificar unicamente cada produto. |
-| **nome** | Nome/descrição do produto. | Deve ser informado no cadastro. |
-| **preço** | Preço do produto. | Deve corresponder ao valor utilizado na venda. |
-| **preço_atacado** | Preço utilizado para a modalidade de venda em atacado. | Aplicável quando a operação utilizar essa modalidade. |
-| **estoque_minimo** | Quantidade mínima desejada para o produto. | Pode auxiliar no controle e reposição do estoque. |
+| id_usuario | INT | Identificador do usuário. |
+| nome | VARCHAR(100) | Nome do usuário. |
+| login | VARCHAR(50) | Identificação de acesso. |
+| senha_hash | VARCHAR(255) | Senha armazenada em formato de hash. |
+| nivel_acesso | VARCHAR(20) | Nível de permissão do usuário. |
 
-## Entidade: ESTOQUE
+### Entidade: PRODUTO
 
-| Atributo | Descrição | Regra de negócio associada |
+| Atributo | Tipo | Descrição |
 |---|---|---|
-| **ID_PRODUTO(C)** | Identificador associado ao produto no estoque. | Deve corresponder a um produto existente. |
-| **quantidade** | Quantidade disponível do produto. | Não deve permitir saldo negativo. |
-
-## Entidade: VENDA
-
-| Atributo | Descrição | Regra de negócio associada |
-|---|---|---|
-| **ID_VENDA(G)** | Identificador único da venda. | Deve identificar cada venda. |
-| **data** | Data da venda. | Deve registrar quando a venda ocorreu. |
-| **total** | Valor total da venda. | Deve corresponder à soma dos itens vendidos. |
-| **forma_pagamento** | Forma utilizada para pagamento. | Deve contemplar as modalidades previstas pelo sistema, incluindo venda fiada. |
-
-## Relacionamento: ITENS_VENDA_REI
-
-| Atributo | Descrição | Regra de negócio associada |
-|---|---|---|
-| **id_item** | Identificador do item da venda. | Deve identificar cada item registrado. |
-| **quantidade** | Quantidade do produto na venda. | Deve ser compatível com a disponibilidade em estoque. |
-| **preco_unitario** | Preço unitário aplicado ao item. | Deve ser utilizado no cálculo do total da venda. |
-
-> **Observação:** a nomenclatura dos atributos foi mantida próxima ao modelo conceitual/DER fornecido pelo grupo. Antes da entrega final, recomenda-se conferir a grafia de atributos como `tsleone` e `ID_VENDA(G)` diretamente no DER definitivo e no dicionário de dados da disciplina.
-
+| id_produto | INT | Identificador do produto. |
+| nome | VARCHAR(120) | Nome do produto. |
+| preco | DECIMAL(10,2) | Preço de venda. |
+| preco_atacado | DECIMAL(10,2) | Preço de atacado. |
+| qtd_minima_atacado | INT | Quantidade mínima para atacado. |
+| quantidade_estoque | INT | Quantidade disponível. |
+| estoque_minimo | INT | Limite mínimo de estoque.
 ---
 
 # 6. Modelagem Conceitual (Entidades, Atributos, Relacionamentos)
 
-## Entidades reconhecidas
+USUARIO
 
-### CLIENTE
+CAIXA
 
-Representa os clientes que podem realizar compras no estabelecimento, inclusive compras na modalidade fiado.
+CEP
 
-### USUARIO
+CLIENTE
 
-Representa os usuários autorizados a operar o sistema, com diferentes níveis de acesso.
+TELEFONE_CLIENTE
 
-### PRODUTO
+VENDA
 
-Representa as mercadorias comercializadas pela organização.
+ITEM_VENDA
 
-### ESTOQUE
+PAGAMENTO
 
-Representa o controle das quantidades disponíveis dos produtos.
+CUPOM_FISCAL
 
-### VENDA
+PRODUTO
 
-Representa as operações de venda realizadas no estabelecimento.
+FORNECEDOR
 
-### ITENS_VENDA_REI
+NF_ENTRADA
 
-Representa os itens que compõem uma venda, incluindo quantidade e preço unitário.
+ITEM_NOTA
 
-### CAIXA 
-
-Representa o controle de lucros da loja e calcula também a entrada e saída do dinheiro 
+CONTAS_A_PAGAR
 
 ## Atributos e classificações
 
@@ -336,22 +319,23 @@ Foi utilizada a ferramenta **ChatGPT** durante a elaboração e organização da
 Sugestão de organização do repositório:
 
 ```text
-Organizaçao-de-Dados---Adega/
+Organiza-o-de-Dados---Adega/
 │
 ├── README.md
 │
 ├── der/
-│   └── DER-Adega-Online.png
+│   ├── DER-Adega-Online.png
+│   └── DER-Adega-Online.pdf
 │
-├── evidencias/
-│   ├── adega-online.jpg
-│   └── pesquisa-campo.jpg
+├── documentos/
+│   ├── modelo_logico_corrigido_v2.pdf
+│   ├── dicionario_de_dados.md
+│   ├── regras_de_negocio.md
+│   └── alteracoes_modelagem.md
 │
-└── documentos/
-    ├── REQUISITOS DO SISTEMA.pdf
-    ├── PROCESSOS DE NEGOCIO.pdf
-    ├── PERGUNTAS REALIZADAS.pdf
-    └── METADADOS – ADEGA ONLINE.pdf
+└── evidencias/
+    ├── adega-online.jpg
+    └── pesquisa-campo.jpg
 ```
 
 ---
